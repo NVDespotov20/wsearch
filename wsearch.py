@@ -1,5 +1,4 @@
-import sys
-import os
+import subprocess
 import string
 import argparse
 from requests_html import HTMLSession
@@ -44,8 +43,8 @@ def get_urls(engine, query):
 
 def main():
     parser = argparse.ArgumentParser(description='Search the web from the command line')
-    parser.add_argument('-q','--query', type=str, nargs='+', help='Search query')
-    parser.add_argument('-e', '--engine', type=str, help='Search engine to use', default='neeva')
+    parser.add_argument('query', type=str, nargs='+', help='Search query')
+    parser.add_argument('-e', '--engine', choices=['neeva', 'bing', 'google', 'duckduckgo'], type=str, help='Search engine to use', default='neeva')
 
     args = parser.parse_args()
 
@@ -53,15 +52,18 @@ def main():
     search = ''.join(args.query)
 
     query = format_query(engine, search)
-
     urls = get_urls(engine,query)
 
     for i, url in enumerate(urls):
         print(f'{i}. {url}\n')
 
-    url_index = int(input("Select Url: "))
-    
-    os.system(f'reader.exe {urls[url_index]}')
+    url_index = input("Select Url: ")
+
+    if(url_index < '0' or url_index > '9' ):
+        print("Invalid input")
+        exit(1)
+
+    subprocess.call(f'.\\reader.exe {urls[int(url_index)]}')
 
 if __name__ == "__main__":
     main()
