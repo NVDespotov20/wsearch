@@ -1,7 +1,13 @@
 import subprocess
 import string
-import argparse
-from requests_html import HTMLSession
+
+try:
+    import argparse
+    from requests_html import HTMLSession
+except ModuleNotFoundError:
+    subprocess.call('pip install requirements.txt', shell=True)
+    import argparse
+    from requests_html import HTMLSession
 
 def char_to_hex(char):
     to_hex = str(hex(ord(char)))
@@ -41,12 +47,17 @@ def get_urls(engine, query):
 
     return valid
 
-def main():
+def get_args():
     parser = argparse.ArgumentParser(description='Search the web from the command line')
     parser.add_argument('query', type=str, nargs='+', help='Search query')
     parser.add_argument('-e', '--engine', choices=['neeva', 'bing', 'google', 'duckduckgo'], type=str, help='Search engine to use', default='neeva')
 
     args = parser.parse_args()
+
+    return args
+
+def main():
+    args = get_args()
 
     engine = args.engine
     search = ''.join(args.query)
@@ -55,15 +66,15 @@ def main():
     urls = get_urls(engine,query)
 
     for i, url in enumerate(urls):
-        print(f'{i}. {url}\n')
+        print(f'{i + 1}. {url}\n')
 
-    url_index = input("Select Url: ")
+    url_index = input("Select URL: ")
 
-    if(url_index.isnumeric() == False or int(url_index) > len(urls) or int(url_index) < 0):
+    if url_index.isnumeric() == False or int(url_index) in range(1, len(urls) + 1) == False:
         print("Invalid input")
         exit(1)
 
-    subprocess.call(f'.\\reader.exe {urls[int(url_index)]}')
+    subprocess.call(f'.\\reader.exe {urls[int(url_index) - 1]}')
 
 if __name__ == "__main__":
     main()
