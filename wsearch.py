@@ -59,7 +59,7 @@ def main():
 
     url_index = input("Select Url: ")
 
-    if(url_index < '0' or url_index > '9' ):
+    if(url_index.isnumeric() == False or int(url_index) > len(urls) or int(url_index) < 0):
         print("Invalid input")
         exit(1)
 
