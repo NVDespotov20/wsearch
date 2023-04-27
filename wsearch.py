@@ -5,7 +5,7 @@ try:
     import argparse
     from requests_html import HTMLSession
 except ModuleNotFoundError:
-    subprocess.call('pip install requirements.txt', shell=True)
+    subprocess.call('pip install -r requirements.txt', shell=True)
     import argparse
     from requests_html import HTMLSession
 
@@ -74,7 +74,7 @@ def main():
         print("Invalid input")
         exit(1)
 
-    subprocess.call(f'.\\reader.exe {urls[int(url_index) - 1]}')
+    subprocess.call(f'reader.exe {urls[int(url_index) - 1]}', shell=True)
 
 if __name__ == "__main__":
     main()
