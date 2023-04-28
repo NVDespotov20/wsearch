@@ -1,13 +1,8 @@
 import subprocess
 import string
+import argparse
+from requests_html import HTMLSession
 
-try:
-    import argparse
-    from requests_html import HTMLSession
-except ModuleNotFoundError:
-    subprocess.call('pip install -r requirements.txt', shell=True)
-    import argparse
-    from requests_html import HTMLSession
 
 def char_to_hex(char):
     to_hex = str(hex(ord(char)))
