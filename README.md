@@ -59,6 +59,6 @@ options:
 ```
 ## Authors
 
-- [NVDespotov20](https://www.github.com/octokatherine)
-- [GGGeorgiev](https://www.github.com/octokatherine)
+- [NVDespotov20](https://github.com/NVDespotov20)
+- [GGGeorgiev](https://github.com/GGGeorgiev20)
 
