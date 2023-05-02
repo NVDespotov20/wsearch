@@ -1,8 +1,8 @@
 import subprocess
 import string
 import argparse
+from sys import exit
 from requests_html import HTMLSession
-
 
 def char_to_hex(char):
     to_hex = str(hex(ord(char)))
@@ -69,7 +69,9 @@ def main():
         print("Invalid input")
         exit(1)
 
-    subprocess.call(f'reader.exe {urls[int(url_index) - 1]}', shell=True)
+    subprocess.call(f'python reader.py {urls[int(url_index) - 1]}', shell=True)
+
+    # subprocess.call(f'python reader.py "https://www.natgeokids.com/uk/discover/animals/general-animals/dog-facts/"', shell=True)
 
 if __name__ == "__main__":
     main()
